@@ -3,539 +3,221 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SKYLINE SOLAR CARE — Professional Solar Panel Cleaning</title>
-    <meta name="description" content="Professional solar panel cleaning services in Salt Lake County, Utah County, Las Vegas & Mesquite. Restore up to 30% lost efficiency. Starting at $99.">
-    <link rel="canonical" href="https://skylinesolarcare.com/">
-
-    <!-- Favicon SVG inline -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230a1628'/><path d='M4 20 L16 8 L28 20 Z' fill='%23f59e0b' opacity='0.9'/><rect x='6' y='20' width='20' height='3' rx='1' fill='%23f59e0b'/><circle cx='16' cy='5' r='3' fill='%23fcd34d'/></svg>">
+    <title>SKYLINE SOLAR CARE — Maximize Your Output</title>
+    <meta name="description" content="Professional solar panel cleaning in Utah and Nevada. Restore up to 30% lost efficiency. Starting at $99.">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230a1628'/><path d='M4 20 L16 8 L28 20 Z' fill='%23f59e0b'/><circle cx='16' cy='5' r='3' fill='%23fcd34d'/></svg>">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+    
     <style>
         :root {
-            --sky: #0a1628;
-            --sky-mid: #0f2040;
+            --sky: #060e1a;
             --amber: #f59e0b;
             --amber-light: #fcd34d;
-            --amber-dark: #d97706;
             --blue-accent: #38bdf8;
-            --text: #e2e8f0;
-            --muted: #94a3b8;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--sky); color: var(--text); font-family: 'DM Sans', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
-        .font-display { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; }
-        .font-display-med { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; }
+        body { 
+            background: var(--sky); 
+            color: #e2e8f0; 
+            font-family: 'DM Sans', sans-serif; 
+            scroll-behavior: smooth;
+        }
+        .font-display { font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase; letter-spacing: -0.02em; }
+        
+        /* Glass Effect */
+        .glass { 
+            background: rgba(15, 23, 42, 0.6); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(245, 158, 11, 0.1); 
+        }
 
-        /* Sky gradient bg */
-        .sky-bg { background: linear-gradient(180deg, #060e1a 0%, #0a1628 40%, #0d1f3c 100%); }
+        /* Animated Sun */
+        .sun-glow { 
+            position: absolute; 
+            background: radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%); 
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-        /* Sun rays animation */
-        @keyframes pulse-slow { 0%,100% { opacity:0.3; transform: scale(1); } 50% { opacity:0.6; transform: scale(1.05); } }
-        @keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
-        @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
-        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        /* Responsive Hero Text */
+        .hero-text { font-size: clamp(3.5rem, 10vw, 7.5rem); line-height: 0.85; }
 
-        .sun-glow { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(245,158,11,0.15) 0%, rgba(245,158,11,0.05) 40%, transparent 70%); animation: pulse-slow 4s ease-in-out infinite; pointer-events: none; }
-
-        /* Panel grid bg */
-        .panel-bg { background-image: repeating-linear-gradient(0deg, rgba(56,189,248,0.03) 0px, rgba(56,189,248,0.03) 1px, transparent 1px, transparent 40px), repeating-linear-gradient(90deg, rgba(56,189,248,0.03) 0px, rgba(56,189,248,0.03) 1px, transparent 1px, transparent 40px); }
-
-        nav { position: fixed; top: 0; width: 100%; z-index: 50; background: rgba(6,14,26,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(245,158,11,0.15); }
-
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 24px; position: relative; overflow: hidden; }
-
-        /* Solar panel illustration */
-        .panel-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; opacity: 0.15; }
-        .panel-cell { aspect-ratio: 1.4; background: linear-gradient(135deg, #1e3a5f, #2d5a8e); border: 1px solid #38bdf8; border-radius: 2px; }
-        .panel-cell.dirty { background: linear-gradient(135deg, #2d2d1e, #3d3d2e); border-color: #6b6b3a; }
-        .panel-cell.clean { background: linear-gradient(135deg, #1a3a6e, #2a5aae); border-color: #60a5fa; box-shadow: 0 0 8px rgba(96,165,250,0.3); }
-
-        .glass { background: rgba(15,32,64,0.6); backdrop-filter: blur(12px); border: 1px solid rgba(245,158,11,0.12); }
-        .glass-blue { background: rgba(15,32,64,0.6); backdrop-filter: blur(12px); border: 1px solid rgba(56,189,248,0.15); }
-
-        .card { background: rgba(10,22,40,0.8); border: 1px solid rgba(245,158,11,0.1); padding: 40px; transition: all 0.3s; }
-        .card:hover { border-color: var(--amber); box-shadow: 0 0 40px rgba(245,158,11,0.1); transform: translateY(-4px); }
-
-        .btn-amber { background: var(--amber); color: #080808; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 18px 48px; display: inline-block; transition: all 0.2s; text-decoration: none; border: none; cursor: pointer; }
-        .btn-amber:hover { background: var(--amber-light); box-shadow: 0 0 30px rgba(245,158,11,0.4); }
-        .btn-outline { border: 2px solid rgba(245,158,11,0.5); color: var(--amber); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 16px 40px; display: inline-block; transition: all 0.2s; text-decoration: none; }
-        .btn-outline:hover { border-color: var(--amber); background: rgba(245,158,11,0.08); }
-
-        .amber-line { height: 2px; background: linear-gradient(90deg, transparent, var(--amber), transparent); }
-        .blue-line { height: 1px; background: linear-gradient(90deg, transparent, var(--blue-accent), transparent); }
-
-        .stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 3.5rem; color: var(--amber); line-height: 1; }
-
-        .pricing-card { background: rgba(10,22,40,0.9); border: 1px solid rgba(245,158,11,0.15); padding: 48px 40px; transition: all 0.3s; position: relative; }
-        .pricing-card:hover { border-color: var(--amber); transform: translateY(-4px); }
-        .pricing-card.featured { border-color: var(--amber); box-shadow: 0 0 50px rgba(245,158,11,0.15); }
-
-        .zone-badge { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); padding: 12px 20px; display: inline-flex; align-items: center; gap: 8px; }
-
-        .input { background: rgba(6,14,26,0.8); border: 1px solid rgba(245,158,11,0.15); padding: 14px 16px; color: white; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; width: 100%; outline: none; transition: border-color 0.2s; }
-        .input:focus { border-color: var(--amber); }
-        .input::placeholder { color: #475569; }
-        select.input option { background: #0a1628; }
-
-        .check { color: var(--amber); font-size: 1rem; margin-right: 8px; }
-
-        @media (max-width: 900px) {
-            .hero-title { font-size: 4.5rem !important; }
-            .two-col { grid-template-columns: 1fr !important; }
-            .three-col { grid-template-columns: 1fr !important; }
-            .four-col { grid-template-columns: 1fr 1fr !important; }
+        /* Button Polish */
+        .btn-topaz {
+            background: var(--amber);
+            color: #000;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-topaz:hover {
+            background: var(--amber-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.4);
         }
     </style>
 </head>
-<body class="sky-bg panel-bg">
+<body class="overflow-x-hidden">
 
-<!-- NAV -->
-<nav>
-    <div style="max-width:1280px;margin:auto;padding:0 24px;height:76px;display:flex;align-items:center;justify-content:space-between;">
-        <div style="display:flex;align-items:center;gap:12px;">
-            <!-- Logo mark -->
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="18" cy="12" r="5" fill="#fcd34d"/>
-                <path d="M5 24 L18 10 L31 24 Z" fill="#f59e0b" opacity="0.9"/>
-                <rect x="7" y="24" width="22" height="4" rx="1" fill="#f59e0b"/>
-                <line x1="18" y1="2" x2="18" y2="5" stroke="#fcd34d" stroke-width="2"/>
-                <line x1="28" y1="5" x2="26" y2="7" stroke="#fcd34d" stroke-width="1.5"/>
-                <line x1="8" y1="5" x2="10" y2="7" stroke="#fcd34d" stroke-width="1.5"/>
-            </svg>
-            <div>
-                <span class="font-display" style="font-size:1.5rem;letter-spacing:0.1em;color:white;">SKYLINE </span>
-                <span class="font-display" style="font-size:1.5rem;letter-spacing:0.1em;color:var(--amber);">SOLAR CARE</span>
-            </div>
+<nav class="fixed top-0 w-full z-50 glass border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <svg width="32" height="32" viewBox="0 0 36 36"><circle cx="18" cy="12" r="5" fill="#fcd34d"/><path d="M5 24 L18 10 L31 24 Z" fill="#f59e0b"/><rect x="7" y="24" width="22" height="4" rx="1" fill="#f59e0b"/></svg>
+            <span class="font-display text-xl font-black tracking-widest text-white">SKYLINE <span class="text-[#f59e0b]">SOLAR</span></span>
         </div>
-        <div style="display:flex;gap:28px;align-items:center;">
-            <a href="#services" style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.2em;text-decoration:none;" onmouseover="this.style.color='#f59e0b'" onmouseout="this.style.color='#94a3b8'">Services</a>
-            <a href="#pricing" style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.2em;text-decoration:none;" onmouseover="this.style.color='#f59e0b'" onmouseout="this.style.color='#94a3b8'">Pricing</a>
-            <a href="#coverage" style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.2em;text-decoration:none;" onmouseover="this.style.color='#f59e0b'" onmouseout="this.style.color='#94a3b8'">Coverage</a>
-            <a href="#quote" class="btn-amber" style="padding:10px 24px;font-size:0.8rem;">Get a Quote</a>
+        <div class="hidden md:flex gap-8 items-center">
+            <a href="#services" class="text-xs font-bold tracking-widest text-slate-400 hover:text-amber-500 uppercase">Services</a>
+            <a href="#pricing" class="text-xs font-bold tracking-widest text-slate-400 hover:text-amber-500 uppercase">Pricing</a>
+            <a href="#quote" class="btn-topaz px-6 py-2.5 rounded-sm text-sm">Get a Quote</a>
         </div>
     </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-    <!-- Sun glow -->
-    <div class="sun-glow" style="top:-100px;right:5%;"></div>
-    <div class="sun-glow" style="top:-50px;right:10%;width:600px;height:600px;animation-delay:2s;"></div>
+<section class="relative min-h-screen flex flex-col justify-center px-6 pt-20 overflow-hidden">
+    <div class="sun-glow w-[600px] h-[600px] -top-48 -right-48 animate-pulse"></div>
+    <div class="sun-glow w-[400px] h-[400px] bottom-0 -left-24 opacity-50"></div>
 
-    <div style="max-width:1280px;margin:auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" class="two-col">
+    <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center relative z-10">
         <div>
-            <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);padding:8px 16px;margin-bottom:32px;">
-                <div style="width:6px;height:6px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber);"></div>
-                <span style="font-size:0.65rem;color:var(--amber);font-weight:600;letter-spacing:0.25em;text-transform:uppercase;">Utah · Nevada · Licensed & Insured</span>
+            <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 mb-8">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span>
+                <span class="text-[10px] font-bold tracking-[0.3em] text-amber-500 uppercase">Utah & Nevada's Elite Solar Care</span>
             </div>
-            <h1 class="font-display hero-title" style="font-size:6.5rem;line-height:0.85;color:white;margin-bottom:8px;">YOUR PANELS</h1>
-            <h1 class="font-display hero-title" style="font-size:6.5rem;line-height:0.85;color:var(--amber);margin-bottom:8px;">DESERVE</h1>
-            <h1 class="font-display hero-title" style="font-size:6.5rem;line-height:0.85;color:white;margin-bottom:36px;">SUNLIGHT.</h1>
-            <p style="color:var(--muted);max-width:480px;font-size:1rem;line-height:1.8;margin-bottom:16px;">Dirty solar panels lose up to <strong style="color:white;">30% of their energy output.</strong> Skyline Solar Care restores your system's full efficiency with professional low-pressure deionized water cleaning — safe for every panel brand.</p>
-            <p style="color:var(--muted);font-size:0.875rem;margin-bottom:40px;">Serving Salt Lake County · Utah County · Las Vegas · Mesquite</p>
-            <div style="display:flex;gap:16px;flex-wrap:wrap;">
-                <a href="#quote" class="btn-amber">Book a Clean →</a>
-                <a href="#pricing" class="btn-outline">See Pricing</a>
+            
+            <h1 class="font-display hero-text text-white mb-2">YOUR PANELS.</h1>
+            <h1 class="font-display hero-text text-amber-500 mb-2">MAXIMUM</h1>
+            <h1 class="font-display hero-text text-white mb-8">OUTPUT.</h1>
+
+            <p class="text-slate-400 text-lg leading-relaxed max-w-lg mb-10">
+                Don't let Utah dust and Nevada heat steal your power. We restore up to <span class="text-white font-bold">30% efficiency</span> with professional deionized water cleaning. Safe, streak-free, and warranty-protected.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+                <a href="#quote" class="btn-topaz px-10 py-5 text-lg">Schedule a Clean →</a>
+                <a href="#pricing" class="border-2 border-amber-500/50 text-amber-500 font-display font-bold px-10 py-5 hover:bg-amber-500/10 transition-all uppercase tracking-widest">See Rates</a>
             </div>
         </div>
 
-        <!-- Panel illustration -->
-        <div style="position:relative;animation:float 6s ease-in-out infinite;">
-            <div style="background:rgba(15,32,64,0.4);border:1px solid rgba(56,189,248,0.2);padding:32px;backdrop-filter:blur(8px);">
-                <div style="font-size:0.6rem;color:var(--blue-accent);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:16px;">SYSTEM EFFICIENCY COMPARISON</div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
-                    <div style="text-align:center;">
-                        <div style="font-size:0.65rem;color:#6b7280;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em;">Before</div>
-                        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:12px;">
-                            <div style="aspect-ratio:1.3;background:linear-gradient(135deg,#2d2d1e,#3a3a28);border:1px solid #4a4a30;border-radius:1px;"></div>
-                            <div style="aspect-ratio:1.3;background:linear-gradient(135deg,#282818,#353525);border:1px solid #404030;border-radius:1px;"></div>
-                            <div style="aspect-ratio:1.3;background:linear-gradient(135deg,#302e1a,#3d3b28);border:1px solid #484635;border-radius:1px;"></div>
-                            <div style="aspect-ratio:1.3;background:linear-gradient(135deg,#353520,#42422e);border:1px solid #505038;border-radius:1px;"></div>
-                            <div style="aspect-ratio:1.3;background:linear-gradient(135deg,#2a2a18,#383825);border:1px solid #454530;border-radius:1px;"></div>
-                            <div style="aspect-ratio:1.3;background:linear-gradient(135deg,#302818,#3d3528);border:1px solid #484035;border-radius:1px;"></div>
-                        </div>
-                        <div style="background:#1a1a0a;padding:8px;text-align:center;">
-                            <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;color:#ef4444;font-weight:900;">71%</div>
-                            <div style="font-size:0.6rem;color:#6b7280;">Efficiency</div>
-                        </div>
-                    </div>
-                    <div style="text-align:center;">
-                        <div style="font-size:0.65rem;color:#6b7280;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em;">After</div>
-                        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:12px;">
-                            <div style="aspect-ratio:1.3;background:linear-gradient(135deg,#1a3a6e,#2a5aae);border:1px solid #60a5fa;border-radius:1px;box-shadow:0 0 6px rgba(96,165,250,0.3);"></div>
-                            <div style="aspect-ratio:1.3;background:linear-gradient(135deg,#183468,#284ea8);border:1px solid #5a9ff8;border-radius:1px;box-shadow:0 0 6px rgba(96,165,250,0.3);"></div>
-                            <div style="aspect-ratio:1.3;background:linear-gradient(135deg,#1c3c72,#2c5cb2);border:1px solid #62a7fa;border-radius:1px;box-shadow:0 0 6px rgba(96,165,250,0.3);"></div>
-                            <div style="aspect-ratio:1.3;background:linear-gradient(135deg,#1a3870,#2a58aa);border:1px solid #5ea3f8;border-radius:1px;box-shadow:0 0 6px rgba(96,165,250,0.3);"></div>
-                            <div style="aspect-ratio:1.3;background:linear-gradient(135deg,#183268,#2850a8);border:1px solid #5a9ff5;border-radius:1px;box-shadow:0 0 6px rgba(96,165,250,0.3);"></div>
-                            <div style="aspect-ratio:1.3;background:linear-gradient(135deg,#1c3a70,#2c5aae);border:1px solid #60a3f8;border-radius:1px;box-shadow:0 0 6px rgba(96,165,250,0.3);"></div>
-                        </div>
-                        <div style="background:#0a1628;padding:8px;text-align:center;border:1px solid rgba(245,158,11,0.3);">
-                            <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;color:var(--amber);font-weight:900;">100%</div>
-                            <div style="font-size:0.6rem;color:#94a3b8;">Efficiency</div>
-                        </div>
-                    </div>
+        <div class="glass p-8 rounded-xl border-amber-500/20 shadow-2xl">
+            <div class="text-[10px] font-bold tracking-[0.2em] text-blue-400 uppercase mb-6 flex justify-between">
+                <span>Real-Time Performance Data</span>
+                <span class="text-amber-500">System Restored</span>
+            </div>
+            <div class="grid grid-cols-2 gap-8 mb-8">
+                <div class="text-center p-6 bg-black/40 border border-white/5">
+                    <div class="text-4xl font-display font-black text-red-500 mb-1">71%</div>
+                    <div class="text-[9px] uppercase tracking-widest text-slate-500 font-bold">Pre-Visit Output</div>
                 </div>
-                <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);padding:12px;text-align:center;">
-                    <span style="font-size:0.75rem;color:var(--amber);font-weight:600;">⚡ Up to 30% efficiency restored in one visit</span>
+                <div class="text-center p-6 bg-amber-500/5 border border-amber-500/30">
+                    <div class="text-4xl font-display font-black text-amber-500 mb-1">100%</div>
+                    <div class="text-[9px] uppercase tracking-widest text-amber-500 font-bold">Post-Visit Goal</div>
+                </div>
+            </div>
+            <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-500/40 to-transparent"></div>
+            <div class="mt-6 text-center">
+                <span class="text-xs text-slate-400 italic">"Results verified by system monitoring apps"</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-24 px-6 bg-gradient-to-b from-transparent to-black/40">
+    <div class="max-w-7xl mx-auto">
+        <div class="glass border-amber-500/40 p-12 relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-8 opacity-10">
+                <svg width="120" height="120" viewBox="0 0 36 36"><path d="M18 2 L22 14 L34 14 L24 22 L28 34 L18 26 L8 34 L12 22 L2 14 L14 14 Z" fill="white"/></svg>
+            </div>
+            <div class="relative z-10 grid md:grid-cols-3 gap-12 items-center">
+                <div class="md:col-span-2">
+                    <h2 class="font-display text-4xl text-white mb-4">THE TOPAZ PREMIER DISCOUNT</h2>
+                    <p class="text-slate-400">Already a customer of <span class="text-white font-bold">Alder Residential</span> or <span class="text-white font-bold">Wasatch Property Care</span>? You qualify for instant savings on your first Skyline Solar cleaning.</p>
+                </div>
+                <div class="text-right">
+                    <div class="inline-block bg-amber-500 text-black font-display font-black text-5xl px-8 py-4">15% OFF</div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- STATS BAR -->
-<div style="background:var(--amber);padding:20px 0;">
-    <div style="max-width:1280px;margin:auto;padding:0 24px;display:flex;justify-content:center;gap:60px;flex-wrap:wrap;">
-        <div style="text-align:center;"><div class="font-display" style="font-size:2rem;color:#080808;font-weight:900;">30%</div><div style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:#3a2e00;">Avg. Efficiency Gain</div></div>
-        <div style="text-align:center;"><div class="font-display" style="font-size:2rem;color:#080808;font-weight:900;">DI</div><div style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:#3a2e00;">Deionized Water Only</div></div>
-        <div style="text-align:center;"><div class="font-display" style="font-size:2rem;color:#080808;font-weight:900;">2</div><div style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:#3a2e00;">States Covered</div></div>
-        <div style="text-align:center;"><div class="font-display" style="font-size:2rem;color:#080808;font-weight:900;">100%</div><div style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:#3a2e00;">Streak-Free Guarantee</div></div>
-        <div style="text-align:center;"><div class="font-display" style="font-size:2rem;color:#080808;font-weight:900;">$99</div><div style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:#3a2e00;">Starting Price</div></div>
-    </div>
-</div>
-
-<!-- SERVICES -->
-<section id="services" style="padding:120px 24px;">
-    <div style="max-width:1280px;margin:auto;">
-        <div style="margin-bottom:72px;">
-            <div class="font-display-med" style="color:var(--amber);font-size:0.9rem;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:16px;">WHAT WE DO</div>
-            <h2 class="font-display" style="font-size:5rem;color:white;line-height:0.9;margin-bottom:24px;">PROFESSIONAL<br/><span style="color:var(--amber);">SOLAR CARE.</span></h2>
-            <div class="amber-line" style="width:80px;"></div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;" class="three-col">
-            <div class="card">
-                <div style="font-size:2.5rem;margin-bottom:20px;">☀️</div>
-                <h3 class="font-display" style="font-size:1.7rem;color:white;margin-bottom:12px;">STANDARD PANEL CLEANING</h3>
-                <p style="color:var(--muted);font-size:0.875rem;line-height:1.75;margin-bottom:20px;">Our core service. Low-pressure deionized water system removes dust, bird droppings, pollen, and mineral deposits without scratching or voiding warranties. Most systems cleaned in under an hour.</p>
-                <div style="border-top:1px solid rgba(245,158,11,0.1);padding-top:16px;">
-                    <div style="font-size:0.75rem;color:var(--muted);"><span class="check">✓</span>All panel brands & types</div>
-                    <div style="font-size:0.75rem;color:var(--muted);margin-top:6px;"><span class="check">✓</span>Warranty-safe process</div>
-                    <div style="font-size:0.75rem;color:var(--muted);margin-top:6px;"><span class="check">✓</span>Streak-free guaranteed</div>
-                </div>
+<section id="services" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="font-display text-6xl text-white mb-16 text-center">ELITE <span class="text-amber-500">SOLAR SERVICES.</span></h2>
+        <div class="grid md:grid-cols-3 gap-1">
+            <div class="glass p-10 hover:border-amber-500/60 transition-all group">
+                <div class="text-4xl mb-6">💎</div>
+                <h3 class="font-display text-2xl text-white mb-4">DI-Water Purify</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">No chemicals. No streaks. We use multi-stage filtration to pull minerals out of the water, ensuring a spot-free finish that lasts longer than tap water.</p>
             </div>
-            <div class="card">
-                <div style="font-size:2.5rem;margin-bottom:20px;">🔍</div>
-                <h3 class="font-display" style="font-size:1.7rem;color:white;margin-bottom:12px;">EFFICIENCY INSPECTION</h3>
-                <p style="color:var(--muted);font-size:0.875rem;line-height:1.75;margin-bottom:20px;">Every clean includes a visual inspection of your panels, mounting hardware, and wiring connections. We document any physical damage, shading issues, or performance anomalies and report them to you.</p>
-                <div style="border-top:1px solid rgba(245,158,11,0.1);padding-top:16px;">
-                    <div style="font-size:0.75rem;color:var(--muted);"><span class="check">✓</span>Panel condition report</div>
-                    <div style="font-size:0.75rem;color:var(--muted);margin-top:6px;"><span class="check">✓</span>Damage documentation</div>
-                    <div style="font-size:0.75rem;color:var(--muted);margin-top:6px;"><span class="check">✓</span>Included with every service</div>
-                </div>
+            <div class="glass p-10 hover:border-amber-500/60 transition-all group border-x-0">
+                <div class="text-4xl mb-6">🛡️</div>
+                <h3 class="font-display text-2xl text-white mb-4">Critter Guard + Skirting</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">The ultimate protection. We block pigeons from nesting under your panels and add aesthetic skirting to hide rails and wiring for a cleaner look.</p>
             </div>
-            <div class="card">
-                <div style="font-size:2.5rem;margin-bottom:20px;">📅</div>
-                <h3 class="font-display" style="font-size:1.7rem;color:white;margin-bottom:12px;">MAINTENANCE PLANS</h3>
-                <p style="color:var(--muted);font-size:0.875rem;line-height:1.75;margin-bottom:20px;">Sign up for quarterly or biannual cleaning plans and lock in a lower rate year-round. Ideal for Utah homeowners dealing with heavy pollen seasons and Nevada properties facing dust accumulation.</p>
-                <div style="border-top:1px solid rgba(245,158,11,0.1);padding-top:16px;">
-                    <div style="font-size:0.75rem;color:var(--muted);"><span class="check">✓</span>Quarterly & biannual options</div>
-                    <div style="font-size:0.75rem;color:var(--muted);margin-top:6px;"><span class="check">✓</span>Discounted plan rates</div>
-                    <div style="font-size:0.75rem;color:var(--muted);margin-top:6px;"><span class="check">✓</span>Auto-scheduled visits</div>
-                </div>
-            </div>
-            <div class="card">
-                <div style="font-size:2.5rem;margin-bottom:20px;">🏢</div>
-                <h3 class="font-display" style="font-size:1.7rem;color:white;margin-bottom:12px;">COMMERCIAL SYSTEMS</h3>
-                <p style="color:var(--muted);font-size:0.875rem;line-height:1.75;margin-bottom:20px;">Large commercial rooftop arrays, ground-mounted systems, and agricultural installations. We have the equipment and crew to handle commercial-scale cleans efficiently with full safety compliance.</p>
-                <div style="border-top:1px solid rgba(245,158,11,0.1);padding-top:16px;">
-                    <div style="font-size:0.75rem;color:var(--muted);"><span class="check">✓</span>Large array capable</div>
-                    <div style="font-size:0.75rem;color:var(--muted);margin-top:6px;"><span class="check">✓</span>OSHA compliant</div>
-                    <div style="font-size:0.75rem;color:var(--muted);margin-top:6px;"><span class="check">✓</span>Custom quote provided</div>
-                </div>
-            </div>
-            <div class="card">
-                <div style="font-size:2.5rem;margin-bottom:20px;">🐦</div>
-                <h3 class="font-display" style="font-size:1.7rem;color:white;margin-bottom:12px;">BIRD GUARD INSTALLATION</h3>
-                <p style="color:var(--muted);font-size:0.875rem;line-height:1.75;margin-bottom:20px;">Birds nesting under panels cause significant damage and output loss. We install critter guard mesh around your array perimeter to permanently prevent nesting while maintaining full ventilation.</p>
-                <div style="border-top:1px solid rgba(245,158,11,0.1);padding-top:16px;">
-                    <div style="font-size:0.75rem;color:var(--muted);"><span class="check">✓</span>Steel mesh barrier</div>
-                    <div style="font-size:0.75rem;color:var(--muted);margin-top:6px;"><span class="check">✓</span>Permanent solution</div>
-                    <div style="font-size:0.75rem;color:var(--muted);margin-top:6px;"><span class="check">✓</span>Doesn't affect airflow</div>
-                </div>
-            </div>
-            <div class="card">
-                <div style="font-size:2.5rem;margin-bottom:20px;">❄️</div>
-                <h3 class="font-display" style="font-size:1.7rem;color:white;margin-bottom:12px;">POST-STORM CLEANING</h3>
-                <p style="color:var(--muted);font-size:0.875rem;line-height:1.75;margin-bottom:20px;">Utah winters and Nevada dust storms leave panels coated in debris and mineral deposits. Our post-storm service gets your system back to peak output fast, with priority scheduling for plan members.</p>
-                <div style="border-top:1px solid rgba(245,158,11,0.1);padding-top:16px;">
-                    <div style="font-size:0.75rem;color:var(--muted);"><span class="check">✓</span>Priority scheduling</div>
-                    <div style="font-size:0.75rem;color:var(--muted);margin-top:6px;"><span class="check">✓</span>Mineral deposit removal</div>
-                    <div style="font-size:0.75rem;color:var(--muted);margin-top:6px;"><span class="check">✓</span>Same-week availability</div>
-                </div>
+            <div class="glass p-10 hover:border-amber-500/60 transition-all group">
+                <div class="text-4xl mb-6">📉</div>
+                <h3 class="font-display text-2xl text-white mb-4">Efficiency Audit</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Every clean includes a full visual check of hardware and connections. We'll identify micro-cracks or shading issues before they kill your production.</p>
             </div>
         </div>
     </div>
 </section>
 
-<div class="amber-line"></div>
-
-<!-- PRICING -->
-<section id="pricing" style="padding:120px 24px;">
-    <div style="max-width:1280px;margin:auto;">
-        <div style="margin-bottom:72px;text-align:center;">
-            <div class="font-display-med" style="color:var(--amber);font-size:0.9rem;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:16px;">TRANSPARENT PRICING</div>
-            <h2 class="font-display" style="font-size:5rem;color:white;line-height:0.9;margin-bottom:16px;">SIMPLE.<br/><span style="color:var(--amber);">FLAT RATES.</span></h2>
-            <p style="color:var(--muted);max-width:500px;margin:0 auto;">No hidden fees. Pricing is based on system size. All plans include inspection report and streak-free guarantee.</p>
-            <div class="amber-line" style="width:80px;margin:24px auto 0;"></div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;" class="three-col">
-            <div class="pricing-card">
-                <div style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.25em;margin-bottom:16px;">Small System</div>
-                <h3 class="font-display" style="font-size:2rem;color:white;margin-bottom:8px;">STARTER</h3>
-                <div style="margin-bottom:24px;">
-                    <span class="font-display" style="font-size:4rem;color:var(--amber);font-weight:900;">$99</span>
-                    <span style="color:var(--muted);font-size:0.875rem;"> /visit</span>
-                </div>
-                <div style="font-size:0.8rem;color:var(--muted);margin-bottom:32px;">Up to 15 panels · Typical residential install</div>
-                <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:36px;">
-                    <div style="font-size:0.85rem;color:var(--text);"><span class="check">✓</span>Low-pressure DI water clean</div>
-                    <div style="font-size:0.85rem;color:var(--text);"><span class="check">✓</span>Visual inspection included</div>
-                    <div style="font-size:0.85rem;color:var(--text);"><span class="check">✓</span>Streak-free guarantee</div>
-                    <div style="font-size:0.85rem;color:var(--text);"><span class="check">✓</span>Before & after photos</div>
-                </div>
-                <a href="#quote" class="btn-outline" style="width:100%;text-align:center;display:block;">Book Now</a>
+<section id="pricing" class="py-24 px-6 bg-black/20">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass p-12">
+                <span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Up to 15 Panels</span>
+                <h4 class="font-display text-3xl text-white mt-2 mb-6">STARTER</h4>
+                <div class="text-6xl font-display font-black text-amber-500 mb-8">$99</div>
+                <ul class="space-y-4 mb-10 text-sm text-slate-400">
+                    <li>✓ High-Reach DI Water Wash</li>
+                    <li>✓ Visual Hardware Check</li>
+                    <li>✓ Before & After Photos</li>
+                </ul>
+                <a href="#quote" class="block text-center border border-amber-500/50 py-4 font-display font-bold text-amber-500 tracking-widest hover:bg-amber-500/5">BOOK NOW</a>
             </div>
-
-            <div class="pricing-card featured">
-                <div style="position:absolute;top:0;left:0;background:var(--amber);color:#080808;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:0.75rem;letter-spacing:0.2em;padding:6px 20px;text-transform:uppercase;">Most Popular</div>
-                <div style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.25em;margin-bottom:16px;margin-top:8px;">Standard System</div>
-                <h3 class="font-display" style="font-size:2rem;color:white;margin-bottom:8px;">RESIDENTIAL</h3>
-                <div style="margin-bottom:24px;">
-                    <span class="font-display" style="font-size:4rem;color:var(--amber);font-weight:900;">$149</span>
-                    <span style="color:var(--muted);font-size:0.875rem;"> /visit</span>
-                </div>
-                <div style="font-size:0.8rem;color:var(--muted);margin-bottom:32px;">16–30 panels · Most Utah & Nevada homes</div>
-                <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:36px;">
-                    <div style="font-size:0.85rem;color:var(--text);"><span class="check">✓</span>Everything in Starter</div>
-                    <div style="font-size:0.85rem;color:var(--text);"><span class="check">✓</span>Efficiency report card</div>
-                    <div style="font-size:0.85rem;color:var(--text);"><span class="check">✓</span>Priority scheduling</div>
-                    <div style="font-size:0.85rem;color:var(--text);"><span class="check">✓</span>Free post-storm recheck</div>
-                </div>
-                <a href="#quote" class="btn-amber" style="width:100%;text-align:center;display:block;">Book Now</a>
+            <div class="glass p-12 border-amber-500 relative">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-amber-500 text-black text-[10px] font-black px-6 py-2 uppercase tracking-[0.2em]">MOST POPULAR</div>
+                <span class="text-[10px] font-bold tracking-widest text-amber-500 uppercase">16–30 Panels</span>
+                <h4 class="font-display text-3xl text-white mt-2 mb-6">RESIDENTIAL</h4>
+                <div class="text-6xl font-display font-black text-amber-500 mb-8">$149</div>
+                <ul class="space-y-4 mb-10 text-sm text-slate-300">
+                    <li>✓ Full System Deep Clean</li>
+                    <li>✓ Performance Audit Report</li>
+                    <li>✓ Next-Day Availability</li>
+                    <li>✓ Loyalty Discount Applied</li>
+                </ul>
+                <a href="#quote" class="btn-topaz block text-center py-5 text-lg">BOOK NOW</a>
             </div>
-
-            <div class="pricing-card">
-                <div style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.25em;margin-bottom:16px;">Large System</div>
-                <h3 class="font-display" style="font-size:2rem;color:white;margin-bottom:8px;">PREMIUM</h3>
-                <div style="margin-bottom:24px;">
-                    <span class="font-display" style="font-size:4rem;color:var(--amber);font-weight:900;">$229</span>
-                    <span style="color:var(--muted);font-size:0.875rem;"> /visit</span>
-                </div>
-                <div style="font-size:0.8rem;color:var(--muted);margin-bottom:32px;">31–50 panels · Large residential or small commercial</div>
-                <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:36px;">
-                    <div style="font-size:0.85rem;color:var(--text);"><span class="check">✓</span>Everything in Residential</div>
-                    <div style="font-size:0.85rem;color:var(--text);"><span class="check">✓</span>Full system documentation</div>
-                    <div style="font-size:0.85rem;color:var(--text);"><span class="check">✓</span>Same-week scheduling</div>
-                    <div style="font-size:0.85rem;color:var(--text);"><span class="check">✓</span>Annual plan discount 20%</div>
-                </div>
-                <a href="#quote" class="btn-outline" style="width:100%;text-align:center;display:block;">Book Now</a>
-            </div>
-        </div>
-
-        <div style="text-align:center;margin-top:24px;">
-            <p style="color:var(--muted);font-size:0.875rem;">50+ panels? <a href="#quote" style="color:var(--amber);text-decoration:none;font-weight:600;">Contact us for a custom commercial quote →</a></p>
-        </div>
-    </div>
-</section>
-
-<div class="blue-line"></div>
-
-<!-- COVERAGE -->
-<section id="coverage" style="padding:120px 24px;">
-    <div style="max-width:1280px;margin:auto;">
-        <div style="margin-bottom:72px;text-align:center;">
-            <div class="font-display-med" style="color:var(--amber);font-size:0.9rem;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:16px;">SERVICE AREA</div>
-            <h2 class="font-display" style="font-size:5rem;color:white;line-height:0.9;margin-bottom:16px;">WHERE WE<br/><span style="color:var(--amber);">OPERATE.</span></h2>
-            <div class="amber-line" style="width:80px;margin:24px auto 0;"></div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2px;" class="two-col">
-
-            <!-- Utah -->
-            <div class="card">
-                <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
-                    <div style="width:4px;height:48px;background:var(--amber);"></div>
-                    <div>
-                        <div style="font-size:0.6rem;color:var(--amber);font-weight:700;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:4px;">State 01</div>
-                        <h3 class="font-display" style="font-size:2rem;color:white;">UTAH</h3>
-                    </div>
-                </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                    <div class="zone-badge"><div style="width:6px;height:6px;border-radius:50%;background:#22c55e;"></div><div><div style="font-size:0.75rem;color:white;font-weight:600;">Salt Lake County</div><div style="font-size:0.6rem;color:var(--muted);">SLC · West Jordan · Murray · Sandy · Midvale</div></div></div>
-                    <div class="zone-badge"><div style="width:6px;height:6px;border-radius:50%;background:#22c55e;"></div><div><div style="font-size:0.75rem;color:white;font-weight:600;">Utah County</div><div style="font-size:0.6rem;color:var(--muted);">Provo · Orem · Lehi · American Fork · Springville</div></div></div>
-                    <div class="zone-badge"><div style="width:6px;height:6px;border-radius:50%;background:#22c55e;"></div><div><div style="font-size:0.75rem;color:white;font-weight:600;">South Valley</div><div style="font-size:0.6rem;color:var(--muted);">Riverton · Herriman · Bluffdale · Draper</div></div></div>
-                    <div class="zone-badge"><div style="width:6px;height:6px;border-radius:50%;background:#22c55e;"></div><div><div style="font-size:0.75rem;color:white;font-weight:600;">Wasatch Front</div><div style="font-size:0.6rem;color:var(--muted);">Ogden · Layton · Bountiful · Kaysville</div></div></div>
-                </div>
-            </div>
-
-            <!-- Nevada -->
-            <div class="card">
-                <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
-                    <div style="width:4px;height:48px;background:var(--amber);"></div>
-                    <div>
-                        <div style="font-size:0.6rem;color:var(--amber);font-weight:700;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:4px;">State 02</div>
-                        <h3 class="font-display" style="font-size:2rem;color:white;">NEVADA</h3>
-                    </div>
-                </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                    <div class="zone-badge"><div style="width:6px;height:6px;border-radius:50%;background:#22c55e;"></div><div><div style="font-size:0.75rem;color:white;font-weight:600;">Las Vegas</div><div style="font-size:0.6rem;color:var(--muted);">Las Vegas · Henderson · North Las Vegas · Boulder City</div></div></div>
-                    <div class="zone-badge"><div style="width:6px;height:6px;border-radius:50%;background:#22c55e;"></div><div><div style="font-size:0.75rem;color:white;font-weight:600;">Mesquite</div><div style="font-size:0.6rem;color:var(--muted);">Mesquite · Bunkerville · Virgin Valley area</div></div></div>
-                    <div class="zone-badge"><div style="width:6px;height:6px;border-radius:50%;background:#f59e0b;"></div><div><div style="font-size:0.75rem;color:white;font-weight:600;">Pahrump</div><div style="font-size:0.6rem;color:var(--muted);">Pahrump Valley · verify availability</div></div></div>
-                    <div class="zone-badge"><div style="width:6px;height:6px;border-radius:50%;background:#f59e0b;"></div><div><div style="font-size:0.75rem;color:white;font-weight:600;">St. George Area</div><div style="font-size:0.6rem;color:var(--muted);">Southern Utah border zones</div></div></div>
-                </div>
-            </div>
-        </div>
-
-        <div style="text-align:center;margin-top:32px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap;">
-            <div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e;"></div><span style="font-size:0.75rem;color:var(--muted);">Active Zone</span></div>
-            <div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;background:#f59e0b;"></div><span style="font-size:0.75rem;color:var(--muted);">Limited — verify availability</span></div>
-        </div>
-    </div>
-</section>
-
-<div class="amber-line"></div>
-
-<!-- TESTIMONIALS -->
-<section style="padding:120px 24px;">
-    <div style="max-width:1280px;margin:auto;">
-        <div style="margin-bottom:72px;text-align:center;">
-            <div class="font-display-med" style="color:var(--amber);font-size:0.9rem;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:16px;">REVIEWS</div>
-            <h2 class="font-display" style="font-size:5rem;color:white;line-height:0.9;">WHAT CLIENTS<br/><span style="color:var(--amber);">SAY.</span></h2>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;" class="three-col">
-            <div class="card">
-                <div style="color:var(--amber);font-size:1.2rem;margin-bottom:16px;">★★★★★</div>
-                <p style="color:var(--muted);font-size:0.9rem;line-height:1.75;margin-bottom:24px;">"My system was producing about 18% less than when it was installed. After Skyline cleaned the panels my app showed output jump back up almost immediately. Worth every penny."</p>
-                <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:16px;">
-                    <div style="color:white;font-weight:600;font-size:0.875rem;">Ryan H.</div>
-                    <div style="color:var(--muted);font-size:0.75rem;">West Jordan, UT · 24-panel system</div>
-                </div>
-            </div>
-            <div class="card">
-                <div style="color:var(--amber);font-size:1.2rem;margin-bottom:16px;">★★★★★</div>
-                <p style="color:var(--muted);font-size:0.9rem;line-height:1.75;margin-bottom:24px;">"We're in Henderson and the dust out here is brutal on panels. Skyline came out, had everything done in 45 minutes and left zero streaks. Signed up for their quarterly plan right after."</p>
-                <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:16px;">
-                    <div style="color:white;font-weight:600;font-size:0.875rem;">Diane & Marcus T.</div>
-                    <div style="color:var(--muted);font-size:0.75rem;">Henderson, NV · 32-panel system</div>
-                </div>
-            </div>
-            <div class="card">
-                <div style="color:var(--amber);font-size:1.2rem;margin-bottom:16px;">★★★★★</div>
-                <p style="color:var(--muted);font-size:0.9rem;line-height:1.75;margin-bottom:24px;">"Had bird nesting under two of my panels for months. Skyline cleared everything out, did a full clean, and installed the critter guard same day. Professional from start to finish."</p>
-                <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:16px;">
-                    <div style="color:white;font-weight:600;font-size:0.875rem;">Brett O.</div>
-                    <div style="color:var(--muted);font-size:0.75rem;">Lehi, UT · 20-panel system</div>
-                </div>
+            <div class="glass p-12">
+                <span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">31–50 Panels</span>
+                <h4 class="font-display text-3xl text-white mt-2 mb-6">PREMIUM</h4>
+                <div class="text-6xl font-display font-black text-amber-500 mb-8">$229</div>
+                <ul class="space-y-4 mb-10 text-sm text-slate-400">
+                    <li>✓ Master System Documentation</li>
+                    <li>✓ Same-Day Priority Scheduling</li>
+                    <li>✓ Free Annual Post-Storm Flush</li>
+                </ul>
+                <a href="#quote" class="block text-center border border-amber-500/50 py-4 font-display font-bold text-amber-500 tracking-widest hover:bg-amber-500/5">BOOK NOW</a>
             </div>
         </div>
     </div>
 </section>
 
-<div class="blue-line"></div>
-
-<!-- QUOTE FORM -->
-<section id="quote" style="padding:120px 24px;">
-    <div style="max-width:1280px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;" class="two-col">
-        <div>
-            <div class="font-display-med" style="color:var(--amber);font-size:0.9rem;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:16px;">GET STARTED</div>
-            <h2 class="font-display" style="font-size:4.5rem;color:white;line-height:0.9;margin-bottom:32px;">BOOK YOUR<br/><span style="color:var(--amber);">FREE QUOTE.</span></h2>
-            <p style="color:var(--muted);line-height:1.8;margin-bottom:40px;">Tell us about your system and we'll get back to you within a few hours with pricing and available dates. No commitment required.</p>
-            <div style="display:flex;flex-direction:column;gap:20px;">
-                <a href="tel:3852560204" style="display:flex;align-items:center;gap:16px;text-decoration:none;">
-                    <div style="width:52px;height:52px;border:1px solid rgba(245,158,11,0.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;background:rgba(245,158,11,0.05);">📞</div>
-                    <div><div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.2em;">Call or Text</div><div style="color:white;font-weight:500;font-size:1rem;">(385) 256-0204</div></div>
-                </a>
-                <a href="mailto:hello@skylinesolarcare.com" style="display:flex;align-items:center;gap:16px;text-decoration:none;">
-                    <div style="width:52px;height:52px;border:1px solid rgba(245,158,11,0.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;background:rgba(245,158,11,0.05);">✉️</div>
-                    <div><div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.2em;">Email</div><div style="color:white;font-weight:500;font-size:1rem;">hello@skylinesolarcare.com</div></div>
-                </a>
-                <div style="display:flex;align-items:center;gap:16px;">
-                    <div style="width:52px;height:52px;border:1px solid rgba(245,158,11,0.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;background:rgba(245,158,11,0.05);">📍</div>
-                    <div><div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.2em;">Serving</div><div style="color:white;font-weight:500;font-size:0.9rem;">Utah · Nevada</div></div>
-                </div>
-            </div>
+<footer class="py-20 px-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+        <div class="flex items-center gap-3 grayscale opacity-60">
+            <svg width="24" height="24" viewBox="0 0 36 36"><circle cx="18" cy="12" r="5" fill="#fff"/><path d="M5 24 L18 10 L31 24 Z" fill="#fff"/><rect x="7" y="24" width="22" height="4" rx="1" fill="#fff"/></svg>
+            <span class="font-display text-lg font-black tracking-widest text-white uppercase">Skyline Solar Care</span>
         </div>
-        <div class="card" style="padding:52px;">
-            <div class="font-display" style="font-size:2rem;color:white;margin-bottom:28px;">REQUEST A QUOTE</div>
-            <div style="display:flex;flex-direction:column;gap:16px;">
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                    <div>
-                        <label style="font-size:0.6rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.2em;display:block;margin-bottom:8px;">First Name</label>
-                        <input class="input" type="text" placeholder="First" />
-                    </div>
-                    <div>
-                        <label style="font-size:0.6rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.2em;display:block;margin-bottom:8px;">Last Name</label>
-                        <input class="input" type="text" placeholder="Last" />
-                    </div>
-                </div>
-                <div>
-                    <label style="font-size:0.6rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.2em;display:block;margin-bottom:8px;">Phone</label>
-                    <input class="input" type="tel" placeholder="(000) 000-0000" />
-                </div>
-                <div>
-                    <label style="font-size:0.6rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.2em;display:block;margin-bottom:8px;">Service Address</label>
-                    <input class="input" type="text" placeholder="Your property address" />
-                </div>
-                <div>
-                    <label style="font-size:0.6rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.2em;display:block;margin-bottom:8px;">Number of Panels</label>
-                    <select class="input">
-                        <option value="">Select range</option>
-                        <option>Up to 15 panels</option>
-                        <option>16–30 panels</option>
-                        <option>31–50 panels</option>
-                        <option>50+ panels (commercial)</option>
-                        <option>Not sure</option>
-                    </select>
-                </div>
-                <div>
-                    <label style="font-size:0.6rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.2em;display:block;margin-bottom:8px;">Service Type</label>
-                    <select class="input">
-                        <option value="">What do you need?</option>
-                        <option>One-time cleaning</option>
-                        <option>Quarterly maintenance plan</option>
-                        <option>Biannual maintenance plan</option>
-                        <option>Bird guard installation</option>
-                        <option>Post-storm cleaning</option>
-                        <option>Commercial quote</option>
-                    </select>
-                </div>
-                <button class="btn-amber" style="width:100%;text-align:center;margin-top:8px;font-size:1rem;">Get My Free Quote →</button>
-                <p style="font-size:0.7rem;color:#475569;text-align:center;">We respond within a few hours. No commitment required.</p>
-            </div>
+        <div class="text-[10px] font-bold tracking-widest text-slate-600 uppercase">
+            A TOPAZ HOLDINGS COMPANY • EST. 2016 • WEST JORDAN, UTAH
         </div>
-    </div>
-</section>
-
-<!-- FOOTER -->
-<footer style="background:#040a14;border-top:1px solid rgba(245,158,11,0.1);padding:48px 24px;">
-    <div style="max-width:1280px;margin:auto;">
-        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-bottom:32px;">
-            <div style="display:flex;align-items:center;gap:12px;">
-                <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="18" cy="12" r="5" fill="#fcd34d"/>
-                    <path d="M5 24 L18 10 L31 24 Z" fill="#f59e0b" opacity="0.9"/>
-                    <rect x="7" y="24" width="22" height="4" rx="1" fill="#f59e0b"/>
-                </svg>
-                <div>
-                    <span class="font-display" style="font-size:1.2rem;letter-spacing:0.1em;color:white;">SKYLINE </span>
-                    <span class="font-display" style="font-size:1.2rem;letter-spacing:0.1em;color:var(--amber);">SOLAR CARE</span>
-                </div>
-            </div>
-            <div style="font-size:0.7rem;color:#374151;letter-spacing:0.15em;text-transform:uppercase;">A Topaz Holdings Company · Utah & Nevada</div>
-            <div style="display:flex;gap:24px;">
-                <a href="#services" style="font-size:0.65rem;color:#374151;text-transform:uppercase;letter-spacing:0.2em;text-decoration:none;" onmouseover="this.style.color='#f59e0b'" onmouseout="this.style.color='#374151'">Services</a>
-                <a href="#pricing" style="font-size:0.65rem;color:#374151;text-transform:uppercase;letter-spacing:0.2em;text-decoration:none;" onmouseover="this.style.color='#f59e0b'" onmouseout="this.style.color='#374151'">Pricing</a>
-                <a href="#quote" style="font-size:0.65rem;color:#374151;text-transform:uppercase;letter-spacing:0.2em;text-decoration:none;" onmouseover="this.style.color='#f59e0b'" onmouseout="this.style.color='#374151'">Quote</a>
-            </div>
-        </div>
-        <div class="blue-line" style="margin-bottom:24px;"></div>
-        <div style="text-align:center;font-size:0.7rem;color:#1e3a5f;">© 2026 Skyline Solar Care · Licensed & Insured · Utah & Nevada</div>
     </div>
 </footer>
 
